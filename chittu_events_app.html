@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chittu Teddy Events</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { transition: background-color 0.3s, color 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        
+        /* View Switching Logic */
+        .view-section { display: none; }
+        .view-section.active { display: flex; flex-direction: column; }
+        
+        /* Premium Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .dark ::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+        ::-webkit-calendar-picker-indicator { cursor: pointer; }
+
+        /* Instagram Gradient for Footer */
+        .bg-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-blue-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50 selection:bg-green-500 selection:text-white transition-colors duration-300 overflow-x-hidden">
+
+    <nav class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-b border-blue-100 dark:border-slate-800 sticky top-0 z-50 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24 items-center">
+                <!-- Fixed Logo Area (Uncropped, properly sized) -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer gap-4 hover:opacity-90 transition-opacity" onclick="navigateTo('home')">
+                    <img src="https://cdn.phototourl.com/member/2026-10-04-92218c72-a5a4-4ec9-ab4a-fb2f799e2aee.jpg" alt="Logo" class="h-16 md:h-20 w-auto object-contain drop-shadow-xl transition-transform hover:scale-105">
+                    <h1 class="hidden sm:block text-xl md:text-2xl font-black bg-gradient-to-r from-blue-800 to-blue-500 dark:from-blue-400 dark:to-blue-200 text-transparent bg-clip-text drop-shadow-sm tracking-tight">
+                        CHITTU TEDDY EVENTS
+                    </h1>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden lg:flex space-x-2 items-center" id="desktop-nav"></div>
+
+                <!-- Utilities & Mobile Menu -->
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleLanguage()" class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors border border-blue-200 dark:border-slate-700 shadow-sm" id="btn-lang">TA</button>
+                    <button onclick="toggleTheme()" class="w-10 h-10 rounded-full flex items-center justify-center bg-white dark:bg-slate-800 text-blue-700 dark:text-yellow-400 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors border border-blue-200 dark:border-slate-700 shadow-sm">
+                        <i class="fa-solid fa-moon dark:hidden text-lg"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-lg"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-700 dark:text-blue-400 hover:text-blue-600 focus:outline-none p-2 ml-1">
+                        <i id="mobile-menu-icon" class="fa-solid fa-bars text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-blue-100 dark:border-slate-800 absolute w-full left-0 shadow-2xl">
+            <div class="px-4 py-4 space-y-2" id="mobile-nav-items"></div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex flex-col relative">
+        
+        <!-- HOME VIEW -->
+        <section id="view-home" class="view-section active animate-fade-in flex-grow">
+            <!-- Colorful & Attractive Hero Section -->
+            <div class="relative overflow-hidden transition-colors py-20 lg:py-32">
+                <!-- Animated Background Blobs to make it "Colorful and Attractable" -->
+                <div class="absolute inset-0 z-0">
+                    <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-400 dark:bg-purple-900 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 animate-blob"></div>
+                    <div class="absolute top-0 -right-4 w-72 h-72 bg-yellow-400 dark:bg-yellow-700 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 animate-blob" style="animation-delay: 2s;"></div>
+                    <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-400 dark:bg-pink-900 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 animate-blob" style="animation-delay: 4s;"></div>
+                </div>
+                
+                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+                    <div class="mb-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-slate-800/80 border border-blue-200 dark:border-slate-700 shadow-lg backdrop-blur-md">
+                        <div class="flex text-yellow-500 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        <span class="text-xs md:text-sm font-bold text-slate-800 dark:text-gray-200 uppercase tracking-wider">Trusted by 500+ Happy Families</span>
+                    </div>
+
+                    <h2 class="text-blue-800 dark:text-blue-300 font-bold tracking-widest mb-3 text-sm md:text-base uppercase" data-i18n="hero-sub">Welcome to the Celebration</h2>
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white mb-8 drop-shadow-md">
+                        CHITTU <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 drop-shadow-lg">TEDDY</span> <br/>
+                        <span class="text-3xl md:text-5xl lg:text-6xl font-black text-slate-700 dark:text-gray-300" data-i18n="hero-title">& PAPER SHOT EVENTS</span>
+                    </h1>
+                    
+                    <div class="bg-white/70 dark:bg-slate-800/70 backdrop-blur-lg border border-blue-200 dark:border-slate-700 p-6 md:p-8 rounded-3xl mb-12 shadow-2xl max-w-3xl hover:scale-105 transition-transform duration-500">
+                        <p class="text-2xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-purple-600 dark:from-blue-400 dark:to-purple-400 leading-relaxed">
+                            "நிகழ்ச்சி உங்களுடையது.. <br class="md:hidden" /> பங்களிப்பு எங்களுடையது.."
+                        </p>
+                        <p class="text-slate-600 dark:text-gray-400 mt-4 text-sm md:text-lg font-bold tracking-wide uppercase" data-i18n="hero-quote">Your Event, Our Contribution</p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-6 items-center">
+                        <div class="flex flex-col items-center">
+                            <!-- Green primary button as requested -->
+                            <button onclick="navigateTo('booking')" class="px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black rounded-full hover:from-green-400 hover:to-emerald-500 hover:scale-110 transition-all shadow-[0_10px_25px_rgba(16,185,129,0.5)] flex items-center justify-center text-lg">
+                                <span data-i18n="btn-book">Book Now</span> <i class="fa-solid fa-calendar-check ml-3 text-2xl"></i>
+                            </button>
+                            <span class="text-sm text-slate-500 dark:text-gray-400 mt-3 font-bold"><i class="fa-solid fa-bolt text-yellow-500 mr-1 animate-pulse"></i> Takes only 1 minute</span>
+                        </div>
+                        <button onclick="navigateTo('services')" class="px-10 py-5 bg-white dark:bg-slate-800 text-blue-800 dark:text-blue-300 font-bold rounded-full border-2 border-blue-200 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-700 transition-all flex items-center justify-center shadow-lg text-lg group">
+                            <span data-i18n="btn-explore">Explore Services</span> <i class="fa-solid fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-20 bg-white dark:bg-slate-900 border-t border-blue-100 dark:border-slate-800 relative z-10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <span class="text-amber-500 font-black tracking-widest uppercase text-sm mb-2 block">Premium Experience</span>
+                        <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6" data-i18n="sec-highlights">Teddy Event Highlights</h2>
+                        <div class="w-32 h-1.5 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto rounded-full mb-6"></div>
+                        <p class="text-slate-600 dark:text-gray-400 max-w-2xl mx-auto font-medium text-lg" data-i18n="sec-highlights-sub">Watch our Chittu Mascot characters bring joy and energy to our latest events!</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="home-videos-container"></div>
+                    
+                    <div class="text-center mt-12">
+                        <button onclick="navigateTo('gallery')" class="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-10 py-4 rounded-full hover:scale-105 transition-all font-black shadow-lg hover:shadow-green-500/40 text-lg">
+                            <span data-i18n="btn-gallery">View Full Gallery</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-20 relative z-10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-6" data-i18n="sec-features">Our Special Features</h2>
+                        <div class="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10" id="features-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-services" class="view-section py-20 flex-grow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-black text-slate-900 dark:text-white mb-6" data-i18n="nav-services">Our Services</h2>
+                    <p class="text-slate-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto text-lg font-medium" data-i18n="services-sub">We provide vibrant entertainment and special effects for all types of functions. Make your day memorable!</p>
+                    <div class="flex flex-wrap justify-center gap-4" id="service-filters"></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="services-grid"></div>
+            </div>
+        </section>
+
+        <section id="view-pricing" class="view-section py-20 flex-grow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-black text-slate-900 dark:text-white mb-6" data-i18n="nav-pricing">Transparent Pricing</h2>
+                    <p class="text-slate-600 dark:text-gray-400 text-lg font-medium" data-i18n="pricing-sub">Choose the perfect package for your special occasion.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto" id="pricing-container"></div>
+            </div>
+        </section>
+
+        <section id="view-booking" class="view-section py-12 md:py-20 flex-grow flex items-center justify-center">
+            <div class="max-w-3xl w-full mx-auto px-4">
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl border border-blue-100 dark:border-slate-700 transition-colors">
+                    <div class="text-center mb-10">
+                        <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-4" data-i18n="nav-booking">Book Your Event</h2>
+                        <p class="text-slate-600 dark:text-gray-400 font-medium text-lg" data-i18n="booking-sub">Fill out the form below and we'll get back to you shortly.</p>
+                    </div>
+
+                    <div id="booking-success" class="hidden text-center py-12 animate-fade-in flex flex-col items-center">
+                        <div class="w-24 h-24 bg-green-100 dark:bg-green-500/20 rounded-full flex items-center justify-center mb-6 shadow-inner">
+                            <i class="fa-solid fa-circle-check text-6xl text-green-600 dark:text-green-500"></i>
+                        </div>
+                        <h3 class="text-3xl font-black text-slate-900 dark:text-white mb-4" data-i18n="booking-success">Request Received!</h3>
+                        <p class="text-slate-600 dark:text-gray-400 mb-8 font-medium text-lg" id="booking-success-msg">Thank you. We will contact you soon.</p>
+                        <!-- Green Action Button -->
+                        <button onclick="resetBookingForm()" class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-10 py-4 rounded-full font-black transition-all shadow-lg hover:shadow-green-500/40 hover:scale-105">
+                            <span data-i18n="btn-book-another">Book Another Event</span>
+                        </button>
+                    </div>
+
+                    <form id="booking-form" onsubmit="submitBooking(event)" class="space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Full Name</label>
+                                <input required type="text" id="book-name" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-700 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all font-medium text-lg" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Phone Number</label>
+                                <input required type="tel" id="book-phone" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-700 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all font-medium text-lg" placeholder="+91 00000 00000">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Event Type</label>
+                            <select required id="book-type" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-700 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 appearance-none transition-all font-medium text-lg cursor-pointer">
+                                <option value="" disabled selected>Select an event type</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Event Date</label>
+                            <input required type="date" id="book-date" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-700 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all font-medium text-lg cursor-pointer">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Location / Venue</label>
+                            <textarea required id="book-location" rows="3" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-700 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 resize-none transition-all font-medium text-lg" placeholder="Enter full address..."></textarea>
+                        </div>
+
+                        <!-- Green primary button as requested -->
+                        <button type="submit" class="w-full py-5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black rounded-xl shadow-[0_10px_25px_rgba(16,185,129,0.4)] hover:shadow-[0_15px_35px_rgba(16,185,129,0.5)] hover:-translate-y-1 transition-all text-xl flex justify-center items-center gap-3">
+                            <i class="fa-solid fa-paper-plane"></i> <span data-i18n="btn-submit-req">Submit Request</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-gallery" class="view-section py-20 flex-grow relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl font-black text-slate-900 dark:text-white mb-6" data-i18n="nav-gallery">Event Gallery</h2>
+                    <p class="text-slate-600 dark:text-gray-400 text-lg font-medium">Glimpses of our recent successful events.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="gallery-container"></div>
+            </div>
+        </section>
+
+        <section id="view-reviews" class="view-section py-20 flex-grow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-5xl font-black text-slate-900 dark:text-white mb-4" data-i18n="nav-reviews">Client Testimonials</h2>
+                        <p class="text-slate-600 dark:text-gray-400 text-lg font-medium">Hear what our happy customers have to say.</p>
+                    </div>
+                    <!-- Blue for toggles, green for submission -->
+                    <button onclick="toggleReviewForm()" id="btn-toggle-review" class="px-8 py-4 bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 border-2 border-blue-200 dark:border-slate-600 rounded-xl font-black hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors shadow-lg hover:shadow-xl text-lg">
+                        Write a Review
+                    </button>
+                </div>
+
+                <div id="review-form-container" class="hidden bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl border border-blue-100 dark:border-slate-700 mb-16 max-w-3xl mx-auto shadow-2xl transition-colors">
+                    <div id="review-auth-msg" class="text-center py-10 hidden flex-col items-center">
+                        <i class="fa-solid fa-lock text-5xl text-slate-300 dark:text-slate-600 mb-4"></i>
+                        <p class="text-slate-700 dark:text-gray-300 mb-6 font-bold text-lg">Please log in to submit a review.</p>
+                        <!-- Green for login routing -->
+                        <button onclick="navigateTo('login')" class="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black rounded-xl hover:scale-105 transition-transform shadow-lg shadow-green-500/30">Go to Login</button>
+                    </div>
+
+                    <form id="review-form" onsubmit="submitReview(event)">
+                        <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-8">Share your experience</h3>
+                        <div class="mb-6">
+                            <label class="block text-sm font-black text-slate-700 dark:text-gray-400 mb-4 uppercase tracking-wide">Rating</label>
+                            <div class="flex gap-3" id="star-rating-selector">
+                                <i class="fa-solid fa-star text-4xl cursor-pointer text-amber-500 hover:scale-110 transition-transform" onclick="setReviewStars(1)"></i>
+                                <i class="fa-solid fa-star text-4xl cursor-pointer text-amber-500 hover:scale-110 transition-transform" onclick="setReviewStars(2)"></i>
+                                <i class="fa-solid fa-star text-4xl cursor-pointer text-amber-500 hover:scale-110 transition-transform" onclick="setReviewStars(3)"></i>
+                                <i class="fa-solid fa-star text-4xl cursor-pointer text-amber-500 hover:scale-110 transition-transform" onclick="setReviewStars(4)"></i>
+                                <i class="fa-solid fa-star text-4xl cursor-pointer text-amber-500 hover:scale-110 transition-transform" onclick="setReviewStars(5)"></i>
+                            </div>
+                            <input type="hidden" id="review-stars-val" value="5">
+                        </div>
+                        <div class="mb-8">
+                            <label class="block text-sm font-black text-slate-700 dark:text-gray-400 mb-3 uppercase tracking-wide">Your Review</label>
+                            <textarea id="review-text" required rows="5" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-700 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 resize-none transition-all text-lg font-medium" placeholder="Tell us how we made your event special..."></textarea>
+                        </div>
+                        <!-- Green primary button -->
+                        <button type="submit" class="px-10 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black rounded-xl shadow-[0_10px_25px_rgba(16,185,129,0.4)] hover:shadow-[0_15px_35px_rgba(16,185,129,0.5)] hover:-translate-y-1 transition-all text-lg">
+                            Post Review
+                        </button>
+                    </form>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12" id="reviews-container"></div>
+            </div>
+        </section>
+
+        <section id="view-login" class="view-section py-12 md:py-20 flex-grow flex items-center justify-center">
+            <div class="max-w-md w-full mx-auto px-4">
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 md:p-12 border border-blue-100 dark:border-slate-700 shadow-2xl transition-colors">
+                    <div class="text-center mb-10">
+                        <h2 class="text-4xl font-black text-slate-900 dark:text-white mb-3" id="auth-title">Welcome Back</h2>
+                        <p class="text-slate-600 dark:text-gray-400 font-medium text-lg" id="auth-subtitle">Sign in to manage your bookings</p>
+                    </div>
+
+                    <div id="auth-normal-form">
+                        <form onsubmit="handleAuth(event)" class="space-y-6">
+                            <div id="auth-name-group" class="hidden">
+                                <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Full Name</label>
+                                <input type="text" id="auth-name" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-600 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all font-medium text-lg" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Phone Number / Username</label>
+                                <input required type="text" id="auth-phone" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-600 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all font-medium text-lg" placeholder="Your mobile or username">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Password</label>
+                                <div class="relative">
+                                    <input required type="password" id="auth-pass" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-600 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 transition-all font-medium text-lg pr-12" placeholder="••••••••">
+                                    <button type="button" onclick="togglePasswordVisibility('auth-pass', 'eye-icon-pass')" class="absolute right-5 top-4.5 text-slate-400 hover:text-blue-500 transition-colors cursor-pointer outline-none">
+                                        <i class="fa-solid fa-eye text-xl mt-1" id="eye-icon-pass"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end" id="auth-forgot">
+                                <button type="button" class="text-sm font-bold text-blue-600 dark:text-blue-400 hover:underline">Forgot password?</button>
+                            </div>
+
+                            <!-- Green Primary Auth Button -->
+                            <button type="submit" id="auth-submit-btn" class="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black rounded-xl shadow-[0_10px_25px_rgba(16,185,129,0.4)] hover:shadow-[0_15px_35px_rgba(16,185,129,0.5)] hover:-translate-y-1 transition-all text-xl mt-6">
+                                Sign In
+                            </button>
+                        </form>
+
+                        <div class="mt-8 text-center text-sm font-medium text-slate-600 dark:text-gray-400 text-lg">
+                            <span id="auth-toggle-text">Don't have an account? </span>
+                            <button onclick="toggleAuthMode()" id="auth-toggle-btn" class="text-blue-600 dark:text-blue-400 hover:underline font-black">Sign Up</button>
+                        </div>
+                    </div>
+
+                    <!-- 2FA Form -->
+                    <div id="auth-2fa-form" class="hidden animate-fade-in">
+                        <div class="text-center mb-8 flex flex-col items-center">
+                            <div class="w-20 h-20 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mb-6 shadow-inner">
+                                <i class="fa-solid fa-mobile-screen-button text-4xl text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-3">2-Step Verification</h3>
+                            <p class="text-base text-slate-600 dark:text-gray-400 font-medium">Enter the verification code sent to the registered admin mobile number.</p>
+                        </div>
+                        <form onsubmit="verifyAdminCode(event)" class="space-y-6">
+                            <div>
+                                <input required type="text" id="auth-2fa-code" class="w-full bg-blue-50/50 dark:bg-slate-900 border-2 border-blue-200 dark:border-slate-600 rounded-xl px-5 py-4 text-center text-3xl tracking-[0.5em] text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 font-black transition-all" placeholder="••••">
+                            </div>
+                            <!-- Green verify button -->
+                            <button type="submit" class="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black rounded-xl hover:-translate-y-1 transition-all shadow-[0_10px_25px_rgba(16,185,129,0.4)] text-lg">
+                                Verify & Login
+                            </button>
+                            <!-- Red destructive cancel button -->
+                            <button type="button" onclick="cancel2FA()" class="w-full py-3 bg-red-100 dark:bg-red-500/10 text-red-600 dark:text-red-400 font-black rounded-xl hover:bg-red-200 dark:hover:bg-red-500/20 transition-colors text-base">
+                                Cancel
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-dashboard" class="view-section py-20 flex-grow">
+            <div class="max-w-5xl mx-auto px-4 w-full">
+                <div class="w-full bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-blue-100 dark:border-slate-700 shadow-2xl transition-colors">
+                    <div class="bg-blue-50/50 dark:bg-slate-900/50 p-8 md:p-10 border-b border-blue-100 dark:border-slate-700 flex flex-col md:flex-row justify-between items-center gap-6">
+                        <div class="flex items-center gap-6">
+                            <div id="dash-avatar" class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center text-white font-black text-3xl uppercase shadow-lg"></div>
+                            <div>
+                                <h2 class="text-3xl font-black text-slate-900 dark:text-white" id="dash-name">Welcome</h2>
+                                <p class="text-slate-600 dark:text-gray-400 font-medium text-lg mt-1" id="dash-phone"></p>
+                            </div>
+                        </div>
+                        <!-- Red Destructive Button -->
+                        <button onclick="logout()" class="flex items-center gap-3 px-8 py-3 bg-red-600 hover:bg-red-500 text-white font-black rounded-xl transition-all shadow-lg hover:shadow-red-500/30 hover:-translate-y-1 text-lg">
+                            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+                        </button>
+                    </div>
+
+                    <div class="p-8 md:p-10">
+                        <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-8">Your Bookings</h3>
+                        <div id="dash-bookings-container"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-admin-dashboard" class="view-section py-20 flex-grow">
+            <div class="max-w-7xl mx-auto px-4 w-full">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+                    <div>
+                        <h2 class="text-4xl font-black text-slate-900 dark:text-white">Admin Control Panel</h2>
+                        <p class="text-slate-600 dark:text-gray-400 font-medium text-lg mt-2">Manage all customer booking requests.</p>
+                    </div>
+                    <!-- Red Destructive Button -->
+                    <button onclick="logout()" class="px-8 py-3 bg-red-600 hover:bg-red-500 text-white font-black rounded-xl shadow-lg hover:shadow-red-500/30 transition-all hover:-translate-y-1 flex items-center gap-3 text-lg">
+                        <i class="fa-solid fa-right-from-bracket"></i> Secure Logout
+                    </button>
+                </div>
+                
+                <div class="bg-white dark:bg-slate-800 rounded-3xl border border-blue-100 dark:border-slate-700 overflow-hidden shadow-2xl transition-colors">
+                    <div class="p-8 border-b border-blue-100 dark:border-slate-700 flex justify-between items-center bg-blue-50/50 dark:bg-slate-900/50">
+                        <h3 class="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-3"><i class="fa-solid fa-book-open text-blue-600"></i> Booking Requests</h3>
+                        <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300 px-5 py-2 rounded-full text-sm font-black border border-blue-200 dark:border-blue-700/50 shadow-sm" id="admin-booking-count">0 Total</span>
+                    </div>
+                    <div class="overflow-x-auto p-2">
+                        <table class="w-full text-left text-slate-700 dark:text-gray-300 min-w-[900px]">
+                            <thead class="bg-slate-50 dark:bg-slate-900/80 text-slate-500 dark:text-gray-400 text-xs uppercase font-black tracking-wider border-b border-gray-200 dark:border-slate-700">
+                                <tr>
+                                    <th class="px-8 py-5 rounded-tl-xl">Client Info</th>
+                                    <th class="px-8 py-5">Event Details</th>
+                                    <th class="px-8 py-5">Location</th>
+                                    <th class="px-8 py-5">Status</th>
+                                    <th class="px-8 py-5 text-right rounded-tr-xl">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-bookings-table" class="divide-y divide-gray-100 dark:divide-slate-700/50">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white dark:bg-slate-950 text-slate-600 dark:text-gray-300 py-16 border-t border-blue-100 dark:border-slate-800 z-10 relative transition-colors mt-auto shadow-[0_-10px_30px_rgba(0,0,0,0.02)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h3 class="text-2xl font-black text-blue-800 dark:text-blue-400 mb-4 tracking-tight">CHITTU TEDDY EVENTS</h3>
+                <p class="text-base italic font-medium">நிகழ்ச்சி உங்களுடையது.. பங்களிப்பு எங்களுடையது..</p>
+                <p class="mt-4 text-sm font-medium leading-relaxed">Making your special moments unforgettable with our unique mascot and paper shot events.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-wider">Contact Us</h3>
+                <ul class="space-y-5">
+                    <li class="flex items-start">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 dark:bg-slate-800 flex items-center justify-center mr-4 flex-shrink-0 shadow-sm">
+                            <i class="fa-solid fa-location-dot text-blue-600 text-lg"></i>
+                        </div>
+                        <span class="text-sm font-bold pt-1 leading-relaxed">Deviyakurichi, Thalaivasal, Salem District<br/><span class="text-xs font-medium text-slate-500 mt-1 block">சேலம் மாவட்டம், தலைவாசல் வட்டம், தேவியாக்குறிச்சி</span></span>
+                    </li>
+                    <li class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-blue-50 dark:bg-slate-800 flex items-center justify-center mr-4 flex-shrink-0 shadow-sm">
+                            <i class="fa-solid fa-phone text-blue-600 text-lg"></i>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-sm font-black bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-blue-100 dark:border-slate-700 shadow-sm">8610924401</span>
+                            <span class="text-sm font-black bg-white dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-blue-100 dark:border-slate-700 shadow-sm">6383132954</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-black text-slate-900 dark:text-white mb-6 uppercase tracking-wider">Connect With Us</h3>
+                <div class="space-y-5">
+                    <!-- High-engagement Instagram Link -->
+                    <a href="https://www.instagram.com/chittu_teddy_event_636112?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer" class="group flex items-center space-x-4 w-fit p-3 bg-white dark:bg-slate-800 rounded-2xl border border-pink-200 dark:border-pink-500/20 hover:scale-105 transition-all shadow-md hover:shadow-pink-500/20 cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-instagram flex items-center justify-center text-white group-hover:animate-pulse">
+                            <i class="fa-brands fa-instagram text-2xl"></i>
+                        </div>
+                        <div class="flex flex-col pr-4">
+                            <span class="font-black text-sm text-slate-900 dark:text-white">Instagram</span>
+                            <span class="font-medium text-xs text-pink-600 dark:text-pink-400">@chittu_teddy_event_636112</span>
+                        </div>
+                    </a>
+                    
+                    <!-- High-engagement WhatsApp Link -->
+                    <a href="https://wa.me/919597169862" target="_blank" rel="noreferrer" class="group flex items-center space-x-4 w-fit p-3 bg-white dark:bg-slate-800 rounded-2xl border border-green-200 dark:border-green-500/20 hover:scale-105 transition-all shadow-md hover:shadow-green-500/20 cursor-pointer">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white group-hover:-translate-y-1 transition-transform">
+                            <i class="fa-brands fa-whatsapp text-3xl"></i>
+                        </div>
+                        <div class="flex flex-col pr-4">
+                            <span class="font-black text-sm text-slate-900 dark:text-white">WhatsApp Chat</span>
+                            <span class="font-black text-xs tracking-wide text-green-600 dark:text-green-400">+91 95971 69862</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t border-gray-200 dark:border-slate-800 text-center text-sm font-black text-slate-500 tracking-wider">
+            © <span id="year"></span> CHITTU TEDDY EVENTS. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Video Modal (Cloudinary Player) -->
+    <div id="video-modal" class="fixed inset-0 z-[100] bg-black/95 flex-col items-center justify-center p-4 hidden animate-fade-in">
+        <div class="absolute top-0 w-full p-6 flex justify-end">
+            <!-- Red for cancel/close -->
+            <button onclick="closeVideo()" class="text-slate-400 hover:text-white transition-colors bg-slate-900/80 hover:bg-red-600 p-4 rounded-full shadow-lg">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+        </div>
+        <div class="w-full max-w-6xl rounded-2xl overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] bg-black mt-12 border border-slate-800">
+            <video id="modal-video-player" src="" controls autoplay class="w-full h-auto max-h-[80vh] outline-none" controlsList="nodownload">
+                Your browser does not support HTML video.
+            </video>
+        </div>
+        <p class="text-slate-400 mt-6 text-xs font-black tracking-[0.3em] uppercase"><i class="fa-solid fa-cloud text-blue-500 mr-2"></i>Cloudinary Secure Stream</p>
+    </div>
+
+    <script>
+        // --- DATA STATE ---
+        let currentView = 'home';
+        let currentUser = null;
+        let isLoginMode = true;
+        let isMobileMenuOpen = false;
+        
+        let bookings = [];
+        let reviews = [
+            { id: 1, name: 'Karthik S.', role: 'Wedding Customer', text: 'The Chittu Blast Machine made our wedding entry absolutely magical! Highly recommend their services.', stars: 5, date: 'Oct 12, 2023' },
+            { id: 2, name: 'Priya M.', role: 'Birthday Parent', text: 'The mascot characters (especially the Teddy) were a huge hit with the kids. Very professional team.', stars: 5, date: 'Nov 05, 2023' },
+            { id: 3, name: 'Ramesh R.', role: 'College Coordinator', text: 'Used them for our cultural fest. The energy they brought with the paper shots was incredible.', stars: 4, date: 'Jan 22, 2024' }
+        ];
+
+        const SERVICES = [
+            { id: 1, title: 'Temple Festivals', tamil: 'தேர் திருவிழா', category: 'festival', icon: '🏛' },
+            { id: 2, title: 'Weddings', tamil: 'திருமண நிகழ்ச்சி', category: 'ceremony', icon: '💍' },
+            { id: 3, title: 'Ear Piercing', tamil: 'காதணி விழா', category: 'ceremony', icon: '👂' },
+            { id: 4, title: 'Puberty Ceremonies', tamil: 'பூப்புனித விழா', category: 'ceremony', icon: '🌸' },
+            { id: 5, title: 'College Events', tamil: 'கல்லூரி நிகழ்ச்சி', category: 'party', icon: '🎓' },
+            { id: 6, title: 'Birthdays', tamil: 'பிறந்தநாள் விழா', category: 'party', icon: '🎂' },
+        ];
+
+        const FEATURES = [
+            { title: 'Chittu Blast Machine', desc: 'Make a grand entrance with our signature blast effect.' },
+            { title: 'Mascot Characters', desc: 'Gorilla, Bunny, and Fox characters to entertain guests.' },
+            { title: 'Paper Shots', desc: 'Colorful confetti paper shots for celebratory moments.' }
+        ];
+
+        const PACKAGES = [
+            { name: 'Basic Celebration', price: '₹5,000', color: 'from-blue-600 to-cyan-500', features: ['1 Mascot Character (2 Hours)', 'Basic Paper Shots', 'Photo Ops', 'Standard Support'] },
+            { name: 'Premium Blast', price: '₹12,000', popular: true, color: 'from-amber-500 to-orange-500', features: ['Chittu Blast Machine', '2 Mascot Characters (4 Hours)', 'Premium Confetti Shots', 'Dedicated Coordinator', 'Priority Booking'] },
+            { name: 'Grand Festival', price: '₹25,000', color: 'from-purple-600 to-pink-500', features: ['2 Chittu Blast Machines', 'All 3 Mascots (Full Day)', 'Unlimited Paper Shots', 'Stage Setup Assistance', 'VIP Support'] }
+        ];
+
+        // 5 Real Cloudinary Videos User Provided
+        const HOME_VIDEOS = [
+            { 
+                title: 'Nallathur Event Teddy Fun', 
+                videoUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/v1791097642/%E0%AE%95%E0%AE%B3%E0%AF%8D%E0%AE%B3%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AF%81%E0%AE%B1%E0%AE%BF%E0%AE%9A%E0%AF%8D%E0%AE%9A%E0%AE%BF_%E0%AE%AE%E0%AE%BE%E0%AE%B5%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AE%AE%E0%AF%8D_%E0%AE%A8%E0%AE%B2%E0%AF%8D%E0%AE%B2%E0%AE%BE%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%82%E0%AE%B0%E0%AF%8D_%E0%AE%95%E0%AE%BF%E0%AE%B0%E0%AE%BE%E0%AE%AE%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AE%BF%E0%AE%B2%E0%AF%8D_%E0%AE%A8%E0%AE%AE%E0%AF%8D%E0%AE%AE_%E0%AE%9F%E0%AF%86%E0%AE%9F%E0%AE%BF_%E0%AE%A8%E0%AE%BF%E0%AE%95%E0%AE%B4%E0%AF%8D%E0%AE%9A%E0%AF%8D%E0%AE%9A%E0%AE%BF_.._nammaooruvlogs_teddye.mp4', 
+                thumbUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/c_fill,w_800,h_600/v1791097642/%E0%AE%95%E0%AE%B3%E0%AF%8D%E0%AE%B3%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AF%81%E0%AE%B1%E0%AE%BF%E0%AE%9A%E0%AF%8D%E0%AE%9A%E0%AE%BF_%E0%AE%AE%E0%AE%BE%E0%AE%B5%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AE%AE%E0%AF%8D_%E0%AE%A8%E0%AE%B2%E0%AF%8D%E0%AE%B2%E0%AE%BE%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%82%E0%AE%B0%E0%AF%8D_%E0%AE%95%E0%AE%BF%E0%AE%B0%E0%AE%BE%E0%AE%AE%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AE%BF%E0%AE%B2%E0%AF%8D_%E0%AE%A8%E0%AE%AE%E0%AF%8D%E0%AE%AE_%E0%AE%9F%E0%AF%86%E0%AE%9F%E0%AE%BF_%E0%AE%A8%E0%AE%BF%E0%AE%95%E0%AE%B4%E0%AF%8D%E0%AE%9A%E0%AF%8D%E0%AE%9A%E0%AE%BF_.._nammaooruvlogs_teddye.jpg' 
+            },
+            { 
+                title: 'Smiles Everywhere', 
+                videoUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/v1791097602/%E0%AE%8E%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%8B%E0%AE%9F_%E0%AE%95%E0%AE%B7%E0%AF%8D%E0%AE%9F%E0%AE%AE%E0%AF%8D_%E0%AE%8E%E0%AE%B5%E0%AF%8D%E0%AE%B5%E0%AE%B3%E0%AE%B5%E0%AF%81_%E0%AE%87%E0%AE%B0%E0%AF%81%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%BE%E0%AE%B2%E0%AF%81%E0%AE%AE%E0%AF%8D_%E0%AE%AA%E0%AE%B0%E0%AE%B5%E0%AE%BE%E0%AE%AF%E0%AE%BF%E0%AE%B2%E0%AF%8D%E0%AE%B2%E0%AF%88_%E0%AE%85%E0%AE%B5%E0%AE%99%E0%AF%8D%E0%AE%95_%E0%AE%AE%E0%AF%81%E0%AE%95%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%81%E0%AE%B2_%E0%AE%92%E0%AE%B0%E0%AF%81_%E0%AE%9A%E0%AE%BF%E0%AE%B0%E0%AE%BF%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81_%E0%AE%B5%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%BE_%E0%AE%AA%E0%AF%8B%E0%AE%A4%E0%AF%81%E0%AE%AE%E0%AF%8D_%EF%B8%8F_.._te.mp4', 
+                thumbUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/c_fill,w_800,h_600/v1791097602/%E0%AE%8E%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%8B%E0%AE%9F_%E0%AE%95%E0%AE%B7%E0%AF%8D%E0%AE%9F%E0%AE%AE%E0%AF%8D_%E0%AE%8E%E0%AE%B5%E0%AF%8D%E0%AE%B5%E0%AE%B3%E0%AE%B5%E0%AF%81_%E0%AE%87%E0%AE%B0%E0%AF%81%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%BE%E0%AE%B2%E0%AF%81%E0%AE%AE%E0%AF%8D_%E0%AE%AA%E0%AE%B0%E0%AE%B5%E0%AE%BE%E0%AE%AF%E0%AE%BF%E0%AE%B2%E0%AF%8D%E0%AE%B2%E0%AF%88_%E0%AE%85%E0%AE%B5%E0%AE%99%E0%AF%8D%E0%AE%95_%E0%AE%AE%E0%AF%81%E0%AE%95%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%81%E0%AE%B2_%E0%AE%92%E0%AE%B0%E0%AF%81_%E0%AE%9A%E0%AE%BF%E0%AE%B0%E0%AE%BF%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AF%81_%E0%AE%B5%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%BE_%E0%AE%AA%E0%AF%8B%E0%AE%A4%E0%AF%81%E0%AE%AE%E0%AF%8D_%EF%B8%8F_.._te.jpg' 
+            },
+            { 
+                title: 'Cute Panda Entry', 
+                videoUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/v1791097589/%E0%AE%85%E0%AE%A9%E0%AF%88%E0%AE%B5%E0%AE%B0%E0%AF%81%E0%AE%AE%E0%AF%8D_%E0%AE%B5%E0%AE%BF%E0%AE%B0%E0%AF%81%E0%AE%AE%E0%AF%8D%E0%AE%AA%E0%AF%81%E0%AE%AE%E0%AF%8D_%E0%AE%85%E0%AE%B4%E0%AE%95%E0%AE%BE%E0%AE%A9_%E0%AE%95%E0%AF%81%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AE%BF_%E0%AE%AA%E0%AE%BE%E0%AE%A3%E0%AF%8D%E0%AE%9F%E0%AE%BE_..._teddyevents_newbeginnings_%EF%B8%8F_godsblessings_%EF%B8%8F_ev.mp4', 
+                thumbUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/c_fill,w_800,h_600/v1791097589/%E0%AE%85%E0%AE%A9%E0%AF%88%E0%AE%B5%E0%AE%B0%E0%AF%81%E0%AE%AE%E0%AF%8D_%E0%AE%B5%E0%AE%BF%E0%AE%B0%E0%AF%81%E0%AE%AE%E0%AF%8D%E0%AE%AA%E0%AF%81%E0%AE%AE%E0%AF%8D_%E0%AE%85%E0%AE%B4%E0%AE%95%E0%AE%BE%E0%AE%A9_%E0%AE%95%E0%AF%81%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AE%BF_%E0%AE%AA%E0%AE%BE%E0%AE%A3%E0%AF%8D%E0%AE%9F%E0%AE%BE_..._teddyevents_newbeginnings_%EF%B8%8F_godsblessings_%EF%B8%8F_ev.jpg' 
+            },
+            { 
+                title: 'Teddy Funny Dance', 
+                videoUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/v1791097587/%E0%AE%89%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%88_%E0%AE%AE%E0%AE%95%E0%AE%BF%E0%AE%B4%E0%AF%8D%E0%AE%B5%E0%AE%BF%E0%AE%95%E0%AF%8D%E0%AE%95_%E0%AE%A8%E0%AE%BE%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%8D_%E0%AE%B5%E0%AE%B0%E0%AF%81%E0%AE%95%E0%AE%BF%E0%AE%B1%E0%AF%8B%E0%AE%AE%E0%AF%8D_..._teddyevents_teddyfunnydance_teddycostume_%E1%B4%87x.mp4', 
+                thumbUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/c_fill,w_800,h_600/v1791097587/%E0%AE%89%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%88_%E0%AE%AE%E0%AE%95%E0%AE%BF%E0%AE%B4%E0%AF%8D%E0%AE%B5%E0%AE%BF%E0%AE%95%E0%AF%8D%E0%AE%95_%E0%AE%A8%E0%AE%BE%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%8D_%E0%AE%B5%E0%AE%B0%E0%AF%81%E0%AE%95%E0%AE%BF%E0%AE%B1%E0%AF%8B%E0%AE%AE%E0%AF%8D_..._teddyevents_teddyfunnydance_teddycostume_%E1%B4%87x.jpg' 
+            },
+            { 
+                title: 'Kids Entertainment with Bunny', 
+                videoUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/v1791097585/%E0%AE%95%E0%AF%81%E0%AE%B4%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AF%88%E0%AE%95%E0%AE%B3%E0%AF%81%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AF%81_%E0%AE%AA%E0%AE%BF%E0%AE%9F%E0%AE%BF%E0%AE%A4%E0%AF%8D%E0%AE%A4_%E0%AE%AE%E0%AF%81%E0%AE%AF%E0%AE%B2%E0%AF%8D_%E0%AE%89%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%8D_%E0%AE%B5%E0%AE%BF%E0%AE%B4%E0%AE%BE%E0%AE%B5%E0%AE%BF%E0%AE%B2%E0%AF%81%E0%AE%AE%E0%AF%8D_%EF%B8%8F..._teddyevents_kidsertainment_kidsfun_1.mp4', 
+                thumbUrl: 'https://res.cloudinary.com/wyphzvxw/video/upload/c_fill,w_800,h_600/v1791097585/%E0%AE%95%E0%AF%81%E0%AE%B4%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AF%88%E0%AE%95%E0%AE%B3%E0%AF%81%E0%AE%95%E0%AF%8D%E0%AE%95%E0%AF%81_%E0%AE%AA%E0%AE%BF%E0%AE%9F%E0%AE%BF%E0%AE%A4%E0%AF%8D%E0%AE%A4_%E0%AE%AE%E0%AF%81%E0%AE%AF%E0%AE%B2%E0%AF%8D_%E0%AE%89%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%8D_%E0%AE%B5%E0%AE%BF%E0%AE%B4%E0%AE%BE%E0%AE%B5%E0%AE%BF%E0%AE%B2%E0%AF%81%E0%AE%AE%E0%AF%8D_%EF%B8%8F..._teddyevents_kidsertainment_kidsfun_1.jpg' 
+            }
+        ];
+
+        const GALLERY_ITEMS = [
+            ...HOME_VIDEOS.slice(0,3),
+            { type: 'image', url: 'https://images.unsplash.com/photo-1530103862676-de8892bc952f?auto=format&fit=crop&q=80&w=800', title: 'Paper Shot Effect' },
+            { type: 'image', url: 'https://images.unsplash.com/photo-1533174000253-1d31488c0301?auto=format&fit=crop&q=80&w=800', title: 'Mascot Interaction' },
+            { type: 'image', url: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&q=80&w=800', title: 'Temple Festival' },
+        ];
+
+        let currentLang = localStorage.getItem('chittu_lang') || 'en';
+        const DICT = {
+            "nav-home": { en: "Home", ta: "முகப்பு" },
+            "nav-services": { en: "Services", ta: "சேவைகள்" },
+            "nav-pricing": { en: "Pricing", ta: "விலை" },
+            "nav-booking": { en: "Booking", ta: "முன்பதிவு" },
+            "nav-gallery": { en: "Gallery", ta: "தொகுப்பு" },
+            "nav-reviews": { en: "Reviews", ta: "விமர்சனங்கள்" },
+            "nav-login": { en: "Login", ta: "உள்நுழை" },
+            "nav-dash": { en: "Dashboard", ta: "கட்டுப்பாட்டகம்" },
+            "hero-sub": { en: "Welcome to the Celebration", ta: "கொண்டாட்டத்திற்கு வரவேற்கிறோம்" },
+            "hero-title": { en: "& PAPER SHOT EVENTS", ta: "மற்றும் பேப்பர் ஷாட் நிகழ்வுகள்" },
+            "hero-quote": { en: "Your Event, Our Contribution", ta: "நிகழ்ச்சி உங்களுடையது.. பங்களிப்பு எங்களுடையது.." },
+            "btn-book": { en: "Book Now", ta: "இப்போதே பதிவு செய்" },
+            "btn-explore": { en: "Explore Services", ta: "சேவைகளை காண்க" },
+            "sec-highlights": { en: "Teddy Event Highlights", ta: "நிகழ்வின் சிறப்பம்சங்கள்" },
+            "sec-highlights-sub": { en: "Watch our Chittu Mascot characters bring joy and energy to our latest events!", ta: "எங்கள் சிட்டு மஸ்காட் கதாபாத்திரங்கள் மகிழ்ச்சியைக் கொண்டு வருவதைப் பாருங்கள்!" },
+            "btn-gallery": { en: "View Full Gallery", ta: "முழு புகைப்படங்களை காண்க" },
+            "sec-features": { en: "Our Special Features", ta: "எங்கள் சிறப்பு அம்சங்கள்" },
+            "services-sub": { en: "We provide vibrant entertainment and special effects for all types of functions. Make your day memorable!", ta: "அனைத்து வகையான விழாக்களுக்கும் நாங்கள் சிறப்பான பொழுதுபோக்கை வழங்குகிறோம்." },
+            "pricing-sub": { en: "Choose the perfect package for your special occasion.", ta: "உங்கள் சிறப்பு நிகழ்விற்கான சரியான தொகுப்பைத் தேர்வுசெய்க." },
+            "booking-sub": { en: "Fill out the form below and we'll get back to you shortly.", ta: "கீழே உள்ள படிவத்தை நிரப்பவும், நாங்கள் விரைவில் உங்களை தொடர்புகொள்வோம்." },
+            "booking-success": { en: "Request Received!", ta: "கோரிக்கை பெறப்பட்டது!" },
+            "btn-book-another": { en: "Book Another Event", ta: "மற்றொரு நிகழ்வை பதிவு செய்" },
+            "btn-submit-req": { en: "Submit Request", ta: "கோரிக்கையை சமர்ப்பி" }
+        };
+
+        function t(key) {
+            return DICT[key] ? DICT[key][currentLang] : key;
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ta' : 'en';
+            localStorage.setItem('chittu_lang', currentLang);
+            document.getElementById('btn-lang').innerText = currentLang === 'en' ? 'TA' : 'EN';
+            applyTranslations();
+            renderNav();
+        }
+
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(DICT[key]) el.innerHTML = DICT[key][currentLang];
+            });
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('chittu_theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('chittu_theme', 'dark');
+            }
+        }
+
+        // Apply saved theme on load
+        if (localStorage.getItem('chittu_theme') === 'light') {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Mock Cloudinary DB connection
+        const CloudinaryDB = {
+            save: async (folder, id, data) => {
+                console.log(`[Cloudinary DB Mock] Saved to ${folder}/${id}.json:`, data);
+                return true;
+            }
+        };
+
+        window.onload = () => {
+            document.getElementById('year').innerText = new Date().getFullYear();
+            document.getElementById('btn-lang').innerText = currentLang === 'en' ? 'TA' : 'EN';
+            applyTranslations();
+            renderNav();
+            renderFeatures();
+            renderHomeVideos();
+            renderServices('all');
+            renderPricing();
+            populateBookingSelect();
+            renderGallery();
+            renderReviews();
+            navigateTo('home');
+        };
+
+        function navigateTo(viewId) {
+            if (viewId === 'login' && currentUser) {
+                viewId = currentUser.role === 'admin' ? 'admin-dashboard' : 'dashboard';
+                if(currentUser.role === 'admin') renderAdminDashboard();
+                else renderDashboard();
+            }
+            if (viewId === 'admin-dashboard') renderAdminDashboard();
+
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(`view-${viewId}`).classList.add('active');
+            
+            currentView = viewId;
+            renderNav(); 
+            
+            isMobileMenuOpen = false;
+            updateMobileMenuUI();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            if(viewId === 'booking' && currentUser) {
+                document.getElementById('book-name').value = currentUser.name;
+                document.getElementById('book-phone').value = currentUser.phone;
+            }
+        }
+
+        function renderNav() {
+            const navItems = [
+                { id: 'home', key: 'nav-home' },
+                { id: 'services', key: 'nav-services' },
+                { id: 'pricing', key: 'nav-pricing' },
+                { id: 'booking', key: 'nav-booking' },
+                { id: 'gallery', key: 'nav-gallery' },
+                { id: 'reviews', key: 'nav-reviews' }
+            ];
+            
+            if (currentUser) {
+                if (currentUser.role === 'admin') navItems.push({ id: 'admin-dashboard', label: 'Admin Panel' });
+                else navItems.push({ id: 'dashboard', key: 'nav-dash' });
+            } else {
+                navItems.push({ id: 'login', key: 'nav-login' });
+            }
+
+            const makeNavHtml = (isMobile) => navItems.map(item => {
+                let label = item.label || t(item.key);
+                const isActive = currentView === item.id;
+                
+                if (isMobile) {
+                    return `<button onclick="navigateTo('${item.id}')" class="block w-full text-left px-5 py-4 rounded-xl text-lg font-black ${isActive ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' : 'text-slate-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700/50'}">${item.id.includes('dashboard') ? `<i class="fa-solid ${currentUser.role==='admin' ? 'fa-shield-halved' : 'fa-user'} mr-3"></i>${label}` : label}</button>`;
+                } else {
+                    return `<button onclick="navigateTo('${item.id}')" class="px-5 py-2.5 rounded-full text-sm font-black transition-all duration-300 ${isActive ? 'bg-gradient-to-r from-blue-700 to-blue-500 dark:from-blue-600 dark:to-blue-400 text-white shadow-lg shadow-blue-500/30 transform scale-105' : 'text-slate-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800'}">${item.id.includes('dashboard') ? `<i class="fa-solid ${currentUser.role==='admin' ? 'fa-shield-halved' : 'fa-user'} mr-2"></i> ${currentUser.name.split(' ')[0]}` : label}</button>`;
+                }
+            }).join('');
+
+            document.getElementById('desktop-nav').innerHTML = makeNavHtml(false);
+            document.getElementById('mobile-nav-items').innerHTML = makeNavHtml(true);
+        }
+
+        function toggleMobileMenu() {
+            isMobileMenuOpen = !isMobileMenuOpen;
+            updateMobileMenuUI();
+        }
+
+        function updateMobileMenuUI() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (isMobileMenuOpen) {
+                menu.classList.remove('hidden');
+                icon.classList.replace('fa-bars', 'fa-xmark');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.replace('fa-xmark', 'fa-bars');
+            }
+        }
+
+        function renderHomeVideos() {
+            const container = document.getElementById('home-videos-container');
+            container.innerHTML = HOME_VIDEOS.map(video => `
+                <div onclick="playVideo('${video.videoUrl}')" class="group relative rounded-3xl overflow-hidden aspect-[4/3] bg-gray-200 dark:bg-slate-800 border-2 border-transparent hover:border-amber-400 cursor-pointer shadow-lg hover:shadow-amber-500/40 transition-all duration-300 transform hover:-translate-y-2">
+                    <img src="${video.thumbUrl}" alt="${video.title}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80"></div>
+                    <div class="absolute top-4 right-4 bg-white/20 dark:bg-black/40 backdrop-blur-md p-3 rounded-2xl border border-white/30">
+                        <i class="fa-solid fa-video text-white text-lg drop-shadow-md"></i>
+                    </div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-20 h-20 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center backdrop-blur-md group-hover:scale-125 transition-transform duration-500 shadow-[0_0_30px_rgba(245,158,11,0.6)]">
+                            <i class="fa-solid fa-play text-white ml-2 text-3xl"></i>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <h3 class="text-white font-black text-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-wide">${video.title}</h3>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderFeatures() {
+            document.getElementById('features-container').innerHTML = FEATURES.map((f, i) => {
+                const colors = ['text-blue-500', 'text-purple-500', 'text-amber-500'];
+                const bgs = ['bg-blue-100 dark:bg-blue-500/20', 'bg-purple-100 dark:bg-purple-500/20', 'bg-amber-100 dark:bg-amber-500/20'];
+                return `
+                <div class="bg-white dark:bg-slate-800 p-10 rounded-3xl border border-blue-100 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-500 transition-colors text-center shadow-xl hover:shadow-2xl cursor-default group">
+                    <div class="w-20 h-20 mx-auto ${bgs[i]} rounded-2xl flex items-center justify-center mb-6 border border-white/50 dark:border-transparent group-hover:-translate-y-2 transition-transform">
+                        <i class="fa-solid fa-star text-4xl ${colors[i]}"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">${f.title}</h3>
+                    <p class="text-slate-600 dark:text-gray-400 font-medium text-lg leading-relaxed">${f.desc}</p>
+                </div>
+            `}).join('');
+        }
+
+        function filterServices(filterType) {
+            document.querySelectorAll('.service-filter-btn').forEach(btn => {
+                if(btn.getAttribute('data-filter') === filterType) {
+                    btn.classList.add('bg-blue-700', 'text-white', 'shadow-lg');
+                    btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-gray-300', 'border-blue-200', 'dark:border-slate-700');
+                } else {
+                    btn.classList.remove('bg-blue-700', 'text-white', 'shadow-lg');
+                    btn.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-gray-300', 'border', 'border-blue-200', 'dark:border-slate-700');
+                }
+            });
+            renderServices(filterType);
+        }
+
+        function renderServices(filter) {
+            const filterHtml = `
+                <button onclick="filterServices('all')" class="service-filter-btn ${filter==='all' ? 'bg-blue-700 text-white shadow-lg' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-gray-300 border border-blue-200 dark:border-slate-700'} px-8 py-3 rounded-full text-sm font-black flex items-center transition-all tracking-wide" data-filter="all"><i class="fa-solid fa-filter mr-2"></i>All Events</button>
+                <button onclick="filterServices('festival')" class="service-filter-btn ${filter==='festival' ? 'bg-blue-700 text-white shadow-lg' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-gray-300 border border-blue-200 dark:border-slate-700'} px-8 py-3 rounded-full text-sm font-black flex items-center transition-all tracking-wide" data-filter="festival">Festivals</button>
+                <button onclick="filterServices('ceremony')" class="service-filter-btn ${filter==='ceremony' ? 'bg-blue-700 text-white shadow-lg' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-gray-300 border border-blue-200 dark:border-slate-700'} px-8 py-3 rounded-full text-sm font-black flex items-center transition-all tracking-wide" data-filter="ceremony">Ceremonies</button>
+                <button onclick="filterServices('party')" class="service-filter-btn ${filter==='party' ? 'bg-blue-700 text-white shadow-lg' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-gray-300 border border-blue-200 dark:border-slate-700'} px-8 py-3 rounded-full text-sm font-black flex items-center transition-all tracking-wide" data-filter="party">Parties</button>
+            `;
+            document.getElementById('service-filters').innerHTML = filterHtml;
+
+            const filtered = filter === 'all' ? SERVICES : SERVICES.filter(s => s.category === filter);
+            document.getElementById('services-grid').innerHTML = filtered.map(service => `
+                <div class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-blue-100 dark:border-slate-700 shadow-xl hover:shadow-2xl hover:border-blue-400 dark:hover:border-blue-500 hover:-translate-y-2 transition-all duration-300 flex flex-col group">
+                    <div class="h-40 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-slate-700 dark:to-slate-900 flex items-center justify-center text-7xl group-hover:scale-110 transition-transform duration-500">
+                        ${service.icon}
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col relative bg-white dark:bg-slate-800 z-10">
+                        <div class="uppercase tracking-widest text-xs font-black text-blue-600 dark:text-blue-400 mb-2">${service.category}</div>
+                        <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">${service.title}</h3>
+                        <h4 class="text-xl font-bold text-slate-500 dark:text-gray-400 mb-6">${service.tamil}</h4>
+                        <ul class="space-y-3 text-base text-slate-700 dark:text-gray-300 mb-8 flex-grow font-medium">
+                            <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 mr-3 text-lg"></i> Blast Machine included</li>
+                            <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 mr-3 text-lg"></i> Choice of Mascot</li>
+                        </ul>
+                        <!-- Green Action Button -->
+                        <button onclick="navigateTo('booking')" class="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl hover:shadow-[0_10px_20px_rgba(16,185,129,0.3)] transition-all font-black text-lg">
+                            Book this Service
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPricing() {
+            document.getElementById('pricing-container').innerHTML = PACKAGES.map(pkg => `
+                <div class="relative bg-white dark:bg-slate-800 rounded-[2.5rem] p-10 border ${pkg.popular ? 'border-amber-400 dark:border-amber-500 shadow-2xl scale-105 md:-mt-6 md:mb-6 z-10' : 'border-blue-100 dark:border-slate-700 shadow-lg hover:shadow-xl'} flex flex-col transition-all">
+                    ${pkg.popular ? `<div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <span class="bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-black px-6 py-2 rounded-full uppercase tracking-widest shadow-lg">Most Popular</span>
+                    </div>` : ''}
+                    <h3 class="text-3xl font-black text-slate-900 dark:text-white mb-4 tracking-tight">${pkg.name}</h3>
+                    <div class="mb-8">
+                        <span class="text-5xl font-black bg-gradient-to-r ${pkg.color} text-transparent bg-clip-text drop-shadow-sm">${pkg.price}</span>
+                        <span class="text-slate-500 dark:text-gray-400 text-lg font-bold"> / event</span>
+                    </div>
+                    <div class="flex-grow">
+                        <ul class="space-y-5 mb-10">
+                            ${pkg.features.map(f => `
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-circle-check mt-1 mr-4 text-xl ${pkg.popular ? 'text-amber-500' : 'text-blue-500'}"></i>
+                                    <span class="text-slate-700 dark:text-gray-300 text-base font-bold">${f}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    <!-- Green action buttons for pricing selection to keep UX consistent -->
+                    <button onclick="navigateTo('booking')" class="w-full py-4 rounded-2xl font-black transition-all shadow-lg text-lg ${pkg.popular ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:shadow-green-500/40 hover:-translate-y-1' : 'bg-blue-50 dark:bg-slate-700 text-blue-700 dark:text-white hover:bg-green-500 hover:text-white dark:hover:bg-green-600 border border-blue-200 dark:border-transparent'}">
+                        Select Package
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function populateBookingSelect() {
+            const select = document.getElementById('book-type');
+            SERVICES.forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s.title;
+                opt.text = `${s.title} (${s.tamil})`;
+                select.appendChild(opt);
+            });
+        }
+
+        async function submitBooking(e) {
+            e.preventDefault();
+            const details = {
+                id: Date.now().toString(),
+                name: document.getElementById('book-name').value,
+                phone: document.getElementById('book-phone').value,
+                eventType: document.getElementById('book-type').value,
+                date: document.getElementById('book-date').value,
+                location: document.getElementById('book-location').value,
+                status: 'Pending'
+            };
+            
+            bookings.unshift(details); 
+            await CloudinaryDB.save('bookings', details.id, details);
+
+            document.getElementById('booking-form').classList.add('hidden');
+            document.getElementById('booking-success').classList.remove('hidden');
+            document.getElementById('booking-success-msg').innerText = `Thank you ${details.name}. We will contact you soon at ${details.phone} to confirm.`;
+        }
+
+        function resetBookingForm() {
+            document.getElementById('booking-form').reset();
+            if(currentUser) {
+                document.getElementById('book-name').value = currentUser.name;
+                document.getElementById('book-phone').value = currentUser.phone;
+            }
+            document.getElementById('booking-success').classList.add('hidden');
+            document.getElementById('booking-form').classList.remove('hidden');
+        }
+
+        function renderGallery() {
+            document.getElementById('gallery-container').innerHTML = GALLERY_ITEMS.map(item => {
+                const isVideo = !!item.videoUrl;
+                const src = isVideo ? item.thumbUrl : item.url;
+                return `
+                <div ${isVideo ? `onclick="playVideo('${item.videoUrl}')"` : ''} class="group relative rounded-3xl overflow-hidden aspect-[4/3] bg-gray-200 dark:bg-slate-800 border border-transparent hover:border-blue-400 dark:border-slate-700 cursor-pointer shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                    <img src="${src}" alt="${item.title}" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent opacity-80"></div>
+                    <div class="absolute top-4 right-4 bg-white/30 dark:bg-black/50 backdrop-blur-md p-3 rounded-2xl border border-white/20 shadow-sm">
+                        <i class="fa-solid ${isVideo ? 'fa-video text-white' : 'fa-image text-white'} text-lg"></i>
+                    </div>
+                    ${isVideo ? `
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center backdrop-blur-md group-hover:scale-125 transition-transform duration-500 shadow-[0_0_30px_rgba(37,99,235,0.6)]">
+                            <i class="fa-solid fa-play text-white ml-2 text-3xl"></i>
+                        </div>
+                    </div>` : ''}
+                    <div class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                        <h3 class="text-white font-black text-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">${item.title}</h3>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function playVideo(url) {
+            const modal = document.getElementById('video-modal');
+            const player = document.getElementById('modal-video-player');
+            player.src = url;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            player.play();
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('video-modal');
+            const player = document.getElementById('modal-video-player');
+            player.pause();
+            player.src = "";
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function renderReviews() {
+            document.getElementById('reviews-container').innerHTML = reviews.map((r, i) => `
+                <div class="bg-white dark:bg-slate-800 p-10 rounded-3xl border border-blue-100 dark:border-slate-700 relative pt-14 shadow-xl hover:shadow-2xl transition-shadow flex flex-col">
+                    <div class="absolute -top-10 left-10 w-20 h-20 bg-blue-50 dark:bg-slate-900 rounded-full border-4 border-white dark:border-slate-800 flex items-center justify-center text-slate-400 dark:text-gray-400 shadow-lg">
+                        <i class="fa-solid fa-user text-3xl ${i === 0 ? 'text-amber-500' : ''}"></i>
+                    </div>
+                    <div class="flex text-amber-500 mb-6 gap-1">
+                        ${[1,2,3,4,5].map(star => `<i class="fa-solid fa-star text-xl ${star <= r.stars ? '' : 'text-gray-300 dark:text-slate-600'}"></i>`).join('')}
+                    </div>
+                    <p class="text-slate-700 dark:text-gray-300 mb-8 italic leading-relaxed text-lg font-medium flex-grow">"${r.text}"</p>
+                    <div class="border-t border-blue-50 dark:border-slate-700 pt-6 mt-auto">
+                        <h4 class="text-slate-900 dark:text-white font-black text-xl">${r.name}</h4>
+                        <div class="flex justify-between items-center mt-2">
+                            <!-- Verified badge -->
+                            <p class="text-sm font-bold text-blue-600 dark:text-blue-400"><i class="fa-solid fa-circle-check mr-2"></i>${r.role}</p>
+                            ${r.date ? `<p class="text-xs font-bold text-slate-400 uppercase tracking-widest">${r.date}</p>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        let reviewFormVisible = false;
+        function toggleReviewForm() {
+            reviewFormVisible = !reviewFormVisible;
+            const container = document.getElementById('review-form-container');
+            const btn = document.getElementById('btn-toggle-review');
+            const authMsg = document.getElementById('review-auth-msg');
+            const form = document.getElementById('review-form');
+
+            if(reviewFormVisible) {
+                container.classList.remove('hidden');
+                btn.innerText = 'Cancel';
+                // Using red for destructive/cancel action
+                btn.classList.add('bg-red-50', 'text-red-600', 'border-red-200', 'dark:bg-red-500/10', 'dark:border-red-500/30', 'dark:text-red-400');
+                btn.classList.remove('text-blue-700', 'border-blue-200', 'bg-white');
+                if(!currentUser) {
+                    authMsg.classList.remove('hidden');
+                    authMsg.classList.add('flex');
+                    form.classList.add('hidden');
+                } else {
+                    authMsg.classList.add('hidden');
+                    authMsg.classList.remove('flex');
+                    form.classList.remove('hidden');
+                }
+            } else {
+                container.classList.add('hidden');
+                btn.innerText = 'Write a Review';
+                btn.classList.remove('bg-red-50', 'text-red-600', 'border-red-200', 'dark:bg-red-500/10', 'dark:border-red-500/30', 'dark:text-red-400');
+                btn.classList.add('text-blue-700', 'border-blue-200', 'bg-white');
+            }
+        }
+
+        function setReviewStars(num) {
+            document.getElementById('review-stars-val').value = num;
+            const stars = document.getElementById('star-rating-selector').children;
+            for(let i=0; i<5; i++) {
+                if(i < num) {
+                    stars[i].classList.replace('text-gray-300', 'text-amber-500') || stars[i].classList.replace('text-slate-600', 'text-amber-500');
+                } else {
+                    stars[i].classList.replace('text-amber-500', 'text-gray-300') || stars[i].classList.replace('text-amber-500', 'text-slate-600');
+                }
+            }
+        }
+
+        async function submitReview(e) {
+            e.preventDefault();
+            if(!currentUser) return;
+
+            const r = {
+                id: Date.now(),
+                name: currentUser.name,
+                role: 'Verified Customer',
+                text: document.getElementById('review-text').value,
+                stars: parseInt(document.getElementById('review-stars-val').value),
+                date: new Date().toLocaleDateString()
+            };
+
+            reviews.unshift(r); 
+            await CloudinaryDB.save('reviews', r.id, r);
+
+            document.getElementById('review-form').reset();
+            setReviewStars(5);
+            toggleReviewForm(); 
+            renderReviews();
+        }
+
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('auth-title').innerText = isLoginMode ? 'Welcome Back' : 'Create Account';
+            document.getElementById('auth-subtitle').innerText = isLoginMode ? 'Sign in to manage your bookings' : 'Join us to book your next big event';
+            document.getElementById('auth-submit-btn').innerText = isLoginMode ? 'Sign In' : 'Sign Up';
+            document.getElementById('auth-toggle-text').innerText = isLoginMode ? "Don't have an account? " : "Already have an account? ";
+            document.getElementById('auth-toggle-btn').innerText = isLoginMode ? 'Sign Up' : 'Sign In';
+            
+            if(isLoginMode) {
+                document.getElementById('auth-name-group').classList.add('hidden');
+                document.getElementById('auth-forgot').classList.remove('hidden');
+                document.getElementById('auth-name').removeAttribute('required');
+            } else {
+                document.getElementById('auth-name-group').classList.remove('hidden');
+                document.getElementById('auth-forgot').classList.add('hidden');
+                document.getElementById('auth-name').setAttribute('required', 'true');
+            }
+        }
+
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+                icon.classList.add('text-blue-500');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+                icon.classList.remove('text-blue-500');
+            }
+        }
+
+        async function handleAuth(e) {
+            e.preventDefault();
+            const phone = document.getElementById('auth-phone').value;
+            const pass = document.getElementById('auth-pass').value;
+            const name = isLoginMode ? 'Demo User' : document.getElementById('auth-name').value;
+            
+            // ADMIN LOGIN CHECK (Requested credentials)
+            if(isLoginMode && phone === 'chittu' && pass === 'chittu123') {
+                document.getElementById('auth-normal-form').classList.add('hidden');
+                document.getElementById('auth-2fa-form').classList.remove('hidden');
+                
+                // Simulate SMS Code
+                window.adminVerificationCode = Math.floor(1000 + Math.random() * 9000).toString();
+                alert(`[Admin Security Verification]\n\nA 2-Step Verification code has been sent to the Admin's registered mobile number.\n\n(Mock SMS Code: ${window.adminVerificationCode})`);
+                return;
+            }
+
+            currentUser = { id: phone, name, phone, role: 'user' };
+            await CloudinaryDB.save('users', phone, currentUser);
+            
+            // Clean up form
+            document.getElementById('auth-phone').value = '';
+            document.getElementById('auth-pass').value = '';
+            document.getElementById('auth-name').value = '';
+            
+            renderNav();
+            navigateTo('dashboard');
+        }
+
+        function verifyAdminCode(e) {
+            e.preventDefault();
+            const entered = document.getElementById('auth-2fa-code').value;
+            
+            if(entered === window.adminVerificationCode) {
+                currentUser = { id: 'admin', name: 'Admin Chittu', phone: 'Admin', role: 'admin' };
+                
+                // Reset Forms
+                document.getElementById('auth-2fa-form').classList.add('hidden');
+                document.getElementById('auth-normal-form').classList.remove('hidden');
+                document.getElementById('auth-2fa-code').value = '';
+                document.getElementById('auth-phone').value = '';
+                document.getElementById('auth-pass').value = '';
+                
+                renderNav();
+                navigateTo('admin-dashboard');
+            } else {
+                alert("Invalid verification code! Please check your mobile messages.");
+            }
+        }
+
+        function cancel2FA() {
+            document.getElementById('auth-2fa-form').classList.add('hidden');
+            document.getElementById('auth-normal-form').classList.remove('hidden');
+            document.getElementById('auth-2fa-code').value = '';
+            document.getElementById('auth-pass').value = '';
+        }
+
+        function logout() {
+            currentUser = null;
+            renderNav();
+            navigateTo('home');
+        }
+
+        function renderAdminDashboard() {
+            if(!currentUser || currentUser.role !== 'admin') return;
+            
+            document.getElementById('admin-booking-count').innerText = `${bookings.length} Total`;
+            
+            const tbody = document.getElementById('admin-bookings-table');
+            if(bookings.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-12 text-slate-500 font-bold text-lg"><i class="fa-solid fa-folder-open text-3xl mb-3 block opacity-50"></i>No booking requests received yet.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = bookings.map(b => `
+                <tr class="hover:bg-blue-50/50 dark:hover:bg-slate-700/50 transition-colors">
+                    <td class="px-8 py-5">
+                        <div class="font-black text-slate-900 dark:text-white text-base">${b.name}</div>
+                        <div class="text-sm font-bold text-blue-600 dark:text-blue-400 mt-1">${b.phone}</div>
+                    </td>
+                    <td class="px-8 py-5">
+                        <div class="font-black text-slate-700 dark:text-gray-200 text-base">${b.eventType}</div>
+                        <div class="text-sm font-bold text-slate-500 dark:text-gray-400 mt-1"><i class="fa-regular fa-calendar mr-2"></i> ${new Date(b.date).toLocaleDateString()}</div>
+                    </td>
+                    <td class="px-8 py-5 text-sm font-bold max-w-[250px] truncate text-slate-600 dark:text-slate-300" title="${b.location}">
+                        ${b.location}
+                    </td>
+                    <td class="px-8 py-5">
+                        <span class="px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider ${b.status === 'Pending' ? 'bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-400 border border-orange-200 dark:border-transparent' : (b.status === 'Confirmed' ? 'bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400 border border-blue-200 dark:border-transparent' : 'bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-400 border border-green-200 dark:border-transparent')}">
+                            ${b.status}
+                        </span>
+                    </td>
+                    <td class="px-8 py-5 text-right">
+                        <select onchange="updateBookingStatus('${b.id}', this.value)" class="bg-white dark:bg-slate-900 border-2 border-blue-100 dark:border-slate-600 rounded-xl p-2.5 text-sm font-black text-slate-700 dark:text-white focus:border-blue-500 focus:outline-none cursor-pointer shadow-sm">
+                            <option value="Pending" ${b.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                            <option value="Confirmed" ${b.status === 'Confirmed' ? 'selected' : ''}>Confirm</option>
+                            <option value="Completed" ${b.status === 'Completed' ? 'selected' : ''}>Complete</option>
+                        </select>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function updateBookingStatus(id, newStatus) {
+            const idx = bookings.findIndex(b => b.id === id);
+            if(idx > -1) {
+                bookings[idx].status = newStatus;
+                CloudinaryDB.save('bookings', id, bookings[idx]); // Mock DB save
+                renderAdminDashboard();
+            }
+        }
+
+        function renderDashboard() {
+            if(!currentUser) return;
+            
+            document.getElementById('dash-avatar').innerText = currentUser.name.charAt(0);
+            document.getElementById('dash-name').innerText = `Welcome, ${currentUser.name}`;
+            document.getElementById('dash-phone').innerText = currentUser.phone;
+
+            const container = document.getElementById('dash-bookings-container');
+            if(bookings.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 bg-blue-50/50 dark:bg-slate-900/50 rounded-3xl border border-blue-100 dark:border-slate-700/50">
+                        <i class="fa-solid fa-calendar text-6xl text-slate-300 dark:text-slate-700 mb-6 block"></i>
+                        <p class="text-slate-600 dark:text-gray-400 mb-8 font-bold text-lg">You have no upcoming events.</p>
+                        <!-- Green Action Button -->
+                        <button onclick="navigateTo('booking')" class="text-white bg-gradient-to-r from-green-500 to-emerald-600 px-10 py-4 rounded-full font-black shadow-lg hover:shadow-green-500/40 hover:-translate-y-1 transition-all text-lg">Book an Event</button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `<div class="space-y-6">` + bookings.map(b => `
+                    <div class="bg-blue-50/30 dark:bg-slate-900 p-8 rounded-3xl border border-blue-100 dark:border-slate-700 flex flex-col md:flex-row justify-between md:items-center gap-6 hover:shadow-lg hover:border-blue-300 transition-all">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300 text-xs font-black uppercase tracking-wider px-4 py-1.5 rounded-full border border-blue-200 dark:border-transparent">${b.eventType}</span>
+                                <span class="text-xs font-black uppercase tracking-wider px-4 py-1.5 rounded-full border ${b.status === 'Pending' ? 'bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-500/20 dark:text-orange-400 dark:border-transparent' : 'bg-green-100 text-green-700 border-green-200 dark:bg-green-500/20 dark:text-green-400 dark:border-transparent'}">${b.status}</span>
+                            </div>
+                            <p class="text-slate-700 dark:text-white font-black text-lg"><i class="fa-solid fa-location-dot mr-3 text-blue-600"></i>${b.location}</p>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <p class="text-slate-500 dark:text-gray-400 text-sm font-black uppercase tracking-widest mb-1">Event Date</p>
+                            <p class="text-blue-700 dark:text-blue-400 font-black text-2xl">${new Date(b.date).toLocaleDateString()}</p>
+                        </div>
+                    </div>
+                `).join('') + `</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
