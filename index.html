@@ -223,7 +223,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div>
                                 <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Full Name</label>
-                                <input required type="text" id="book-name" class="w-full bg-brand-bg dark:bg-slate-900 border-2 border-gray-200 dark:border-slate-700 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-brand-header transition-all font-medium text-lg" placeholder="John Doe">
+                                <input required type="text" id="book-name" class="w-full bg-brand-bg dark:bg-slate-900 border-2 border-gray-200 dark:border-slate-700 rounded-xl px-5 py-4 text-slate-900 dark:text-white focus:outline-none focus:border-brand-header transition-all font-medium text-lg" placeholder="Ex: Chittu Teddy">
                             </div>
                             <div>
                                 <label class="block text-sm font-black text-slate-700 dark:text-gray-300 mb-2 uppercase tracking-wide">Phone Number</label>
@@ -555,12 +555,12 @@
         const SERVICES = [
             { id: 1, title: 'Temple Festivals', tamil: 'தேர் திருவிழா', category: 'festival', img: 'https://cdn.phototourl.com/member/2026-10-04-dc1f4321-651e-45d9-a3ad-e4770af83375.png' },
             { id: 2, title: 'Weddings', tamil: 'திருமண நிகழ்ச்சி', category: 'ceremony', img: 'https://cdn.phototourl.com/member/2026-10-04-c2ad1dea-c74e-434b-ad34-0b9e89f899c5.png' },
-            { id: 3, title: 'Ear Piercing', tamil: 'காதணி விழா', category: 'ceremony', img: 'https://cdn.phototourl.com/member/2026-10-04-048280d3-dbf7-4cd8-960c-2c71b02d6c11.png' },
+            { id: 3, title: 'Ear Piercing', tamil: 'காதணி விழா', category: 'ceremony', img: 'https://cdn.phototourl.com/member/2026-10-04-77bf886d-4424-4c4f-a222-44dae2942dc8.png' },
             { id: 4, title: 'Puberty Ceremonies', tamil: 'பூப்புனித விழா', category: 'ceremony', img: 'https://cdn.phototourl.com/member/2026-10-04-7ec30ea5-0802-4f85-8610-db4b23785fe6.png' },
-            { id: 5, title: 'College Events', tamil: 'கல்லூரி நிகழ்ச்சி', category: 'party', img: 'https://cdn.phototourl.com/member/2026-10-04-f1f5cac5-5a87-41f5-bc35-4dcb432af0cb.png' },
-            { id: 6, title: 'Birthdays', tamil: 'பிறந்தநாள் விழா', category: 'party', img: 'https://cdn.phototourl.com/member/2026-10-04-86b40764-9273-48e9-9949-d8c7129bc1c7.png' },
+            { id: 5, title: 'College Events', tamil: 'கல்லூரி நிகழ்ச்சி', category: 'party', img: 'https://cdn.phototourl.com/member/2026-10-04-fd400b23-b6f5-4d32-84a1-0fd433edd386.png' },
+            { id: 6, title: 'Birthdays', tamil: 'பிறந்தநாள் விழா', category: 'party', img: 'https://cdn.phototourl.com/member/2026-10-04-8d039af9-043c-4123-8493-ceffe4709cb7.png' },
             { id: 7, title: 'Private Events', tamil: 'தனியார் நிகழ்வுகள்', category: 'party', img: 'https://cdn.phototourl.com/member/2026-10-04-1822e3a1-609a-42b2-9787-ee6845b0caa5.png' },
-            { id: 8, title: 'Shop Openings', tamil: 'கடை திறப்பு', category: 'ceremony', img: 'https://cdn.phototourl.com/member/2026-10-04-f0e90d2c-75ed-4a92-8374-0d93ba9c0371.png' },
+            { id: 8, title: 'Shop Openings', tamil: 'கடை திறப்பு', category: 'ceremony', img: 'https://cdn.phototourl.com/member/2026-10-04-429d7537-db07-4ff8-96f8-d5b031d7ff87.png' },
             { id: 9, title: 'Corporate Functions', tamil: 'கார்ப்பரேட் நிகழ்வுகள்', category: 'party', img: 'https://cdn.phototourl.com/member/2026-10-04-93861742-11be-4586-9490-7196c6041c85.png' },
         ];
 
@@ -607,9 +607,9 @@
 
         const GALLERY_ITEMS = [
             ...HOME_VIDEOS.slice(0,3),
-            { type: 'image', url: 'https://images.unsplash.com/photo-1530103862676-de8892bc952f?auto=format&fit=crop&q=80&w=800', title: 'Paper Shot Effect' },
-            { type: 'image', url: 'https://images.unsplash.com/photo-1533174000253-1d31488c0301?auto=format&fit=crop&q=80&w=800', title: 'Mascot Interaction' },
-            { type: 'image', url: 'https://images.unsplash.com/photo-1621831792620-131db2d580bf?auto=format&fit=crop&q=80&w=800', title: 'Temple Festival' },
+            { type: 'image', url: 'https://cdn.phototourl.com/member/2026-10-04-84773e8a-58c1-42b3-be1f-3c909d10e1e3.png', title: 'Paper Shot Effect' },
+            { type: 'image', url: 'https://cdn.phototourl.com/member/2026-10-04-f503f553-24b0-4120-86a4-cf6f258d6bc1.png', title: 'Mascot Interaction' },
+            { type: 'image', url: 'https://cdn.phototourl.com/member/2026-10-04-1207c85d-9b64-4a19-ae6a-b6d412e19a27.png', title: 'Temple Festival' },
         ];
 
         let currentLang = localStorage.getItem('chittu_lang') || 'en';
